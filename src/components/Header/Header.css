@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 1rem;
+  /* border: 1px solid red; */
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo > h2 {
+  font-size: 1.375rem;
+  margin-left: 1rem;
+}
+
+.header__logo > .MuiSvgIcon-root {
+  color: red;
+}
+
+.header__avatar {
+  display: flex;
+  align-items: center;
+}
+
+.header__avatar > p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 1rem;
+}
