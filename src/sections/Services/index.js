@@ -13,7 +13,7 @@ const Services = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const getAllProjects = async () => {
-    const { data } = await axios.get(process.env.REACT_APP_BASE_URL, {
+    const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}`, {
       headers: {
         Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
       },
@@ -52,6 +52,7 @@ const Services = () => {
         />
       </div>
       <br />
+
       <Pagination style={{ margin: "0 auto" }} />
 
       <Modal
