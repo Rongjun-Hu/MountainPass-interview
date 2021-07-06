@@ -5,12 +5,14 @@ const Project = ({ projects }) => {
   return (
     <div className="project">
       {projects.map((project) => (
-        <ButtonBox
-          key={project.id}
-          isDashed={true}
-          description={project.name}
-          version={project.version}
-        />
+        <div className="project__item" key={project.id}>
+          <ButtonBox
+            solid="buttonBox--success"
+            hasStyle={true}
+            description={project.name}
+            version={project.version}
+          />
+        </div>
       ))}
     </div>
   );
