@@ -1,0 +1,12 @@
+.project {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.project__item {
+  font-size: 0.875rem;
+  max-width: 155px;
+  width: 100%;
+  cursor: pointer;
+}

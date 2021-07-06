@@ -1,0 +1,17 @@
+.projects {
+  /* border: 1px solid red; */
+}
+
+.projects__button {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.projects__button button {
+  width: 100%;
+  border: 1px dashed #999999;
+  background-color: #fff;
+  padding: 1rem 0;
+  color: #999999;
+  font-weight: 500;
+}
