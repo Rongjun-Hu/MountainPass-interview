@@ -11,15 +11,20 @@ const Services = () => {
   const [openModal, setOpenModal] = useState(false);
   const [projects, setProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [totalPage, setTotalPage] = useState(0);
 
   const getAllProjects = async () => {
-    const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}`, {
-      headers: {
-        Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
-      },
-    });
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}?page=1`,
+      {
+        headers: {
+          Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
+        },
+      }
+    );
 
     setProjects(data.data);
+    setTotalPage(data.totalPages);
     console.log(data);
   };
 
@@ -53,7 +58,11 @@ const Services = () => {
       </div>
       <br />
 
-      <Pagination style={{ margin: "0 auto" }} />
+      <Pagination
+        defaultPage={1}
+        count={totalPage}
+        style={{ margin: "0 auto" }}
+      />
 
       <Modal
         openModal={openModal}
