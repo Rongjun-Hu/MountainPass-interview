@@ -1,7 +1,11 @@
 import "./Buttons.css";
 
-const Buttons = ({ name }) => {
-  return <button className="buttons">{name}</button>;
+const Buttons = ({ name, showModal }) => {
+  return (
+    <button className="buttons" onClick={showModal}>
+      {name}
+    </button>
+  );
 };
 
 export default Buttons;
