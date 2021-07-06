@@ -2,11 +2,16 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+  max-width: 1000px;
+  width: 100%;
 }
 
 .project__item {
   font-size: 0.875rem;
   max-width: 155px;
   width: 100%;
+  margin: 0 auto;
   cursor: pointer;
 }

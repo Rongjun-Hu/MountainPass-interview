@@ -4,8 +4,9 @@
   align-items: center;
   flex-direction: column;
   /* padding: 1rem; */
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  /* margin-top: 2rem;
+  margin-bottom: 2rem; */
+  margin: 2rem auto;
   max-width: 90%;
   /* border: 1px solid red; */
 }
@@ -22,4 +23,10 @@
   gap: 2rem;
   /* max-width: 800px; */
   /* border: 1px solid pink; */
+}
+
+@media (min-width: 600px) {
+  .quickActions {
+    margin: 2rem 0;
+  }
 }

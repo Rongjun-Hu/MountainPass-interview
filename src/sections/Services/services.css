@@ -15,8 +15,8 @@
 
 .services__input {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+
   margin-top: 0.625rem;
   /* border: 1px solid red; */
 }
@@ -27,8 +27,21 @@
   outline: none;
   background-color: #f1f3f4;
   border-radius: 100px;
+  margin-bottom: 1rem;
 }
 
 .services__projectList {
   margin-top: 1.5rem;
+}
+
+@media (min-width: 630px) {
+  .services__input {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .services__input > input {
+    margin: 0;
+  }
 }
