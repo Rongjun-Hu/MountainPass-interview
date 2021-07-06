@@ -1,11 +1,11 @@
 import "./ButtonBox.css";
 
-const ButtonBox = ({ description, version, isDashed }) => {
+const ButtonBox = ({ description, version, hasStyle, solid }) => {
   return (
-    <div className={isDashed ? "buttonBox buttonBox--dashed" : "buttonBox"}>
+    <div className={hasStyle ? `buttonBox ${solid}` : `buttonBox`}>
       <div className="buttonBox__info">
         <p>{description}</p>
-        <p className="buttonBox__version">{version}</p>
+        <p className="buttonBox__version">{version && `v ${version}`}</p>
       </div>
     </div>
   );
