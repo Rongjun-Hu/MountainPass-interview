@@ -3,12 +3,14 @@ import Buttons from "../../components/Buttons";
 import Modal from "../../components/Modal";
 import Projects from "../../components/Projects";
 import { Pagination } from "@material-ui/lab";
+import { Search } from "@material-ui/icons";
 import axios from "axios";
 import "./services.css";
 
 const Services = () => {
   const [openModal, setOpenModal] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const getAllProjects = async () => {
     const { data } = await axios.get(process.env.REACT_APP_BASE_URL, {
@@ -25,24 +27,38 @@ const Services = () => {
     getAllProjects();
   }, []);
 
+  const filterProjects = projects.filter((project) => {
+    return project.name.toLowerCase().includes(searchTerm.toLocaleLowerCase());
+  });
+
   return (
     <div className="services">
       <h1>Services</h1>
       <div className="services__input">
-        <input type="text" placeholder="Filter" />
+        <Search />
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search Project"
+        />
         <Buttons name="ADD SERVICE" showModal={() => setOpenModal(true)} />
       </div>
       <div className="services__projectList">
-        <Projects projects={projects} />
+        <Projects
+          projects={filterProjects}
+          getAllProjects={getAllProjects}
+          term={searchTerm}
+        />
       </div>
       <br />
       <Pagination style={{ margin: "0 auto" }} />
-      {openModal && (
-        <Modal
-          getAllProjects={getAllProjects}
-          closeModal={() => setOpenModal(false)}
-        />
-      )}
+
+      <Modal
+        openModal={openModal}
+        getAllProjects={getAllProjects}
+        closeModal={() => setOpenModal(false)}
+      />
     </div>
   );
 };
