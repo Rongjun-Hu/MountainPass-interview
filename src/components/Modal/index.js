@@ -57,12 +57,15 @@ const Modal = ({ closeModal, page, openModal }) => {
               <Close onClick={closeModal} style={{ cursor: "pointer" }} />
             </div>
 
-            <form onSubmit={handleSubmit} autoComplete="off">
+            <form autoComplete="off">
               <TextField
                 style={{ marginBottom: "1rem" }}
+                error={projectData.name === ""}
+                autoFocus={true}
                 name="name"
                 label="Name"
                 variant="outlined"
+                helperText="Name fileld is required"
                 size="small"
                 value={projectData.name}
                 onChange={(e) =>
@@ -75,6 +78,8 @@ const Modal = ({ closeModal, page, openModal }) => {
                 label="Version"
                 variant="outlined"
                 size="small"
+                helperText="Version fileld is required"
+                error={projectData.version === ""}
                 value={projectData.version}
                 onChange={(e) =>
                   setProjectData({
@@ -84,7 +89,20 @@ const Modal = ({ closeModal, page, openModal }) => {
                 }
                 required
               />
-              <Buttons name="Add Service" type="submit" />
+              <div className="form__buttons">
+                <Buttons
+                  name="Add Service"
+                  type="submit"
+                  // hover={true}
+                  handleClick={handleSubmit}
+                />
+                <Buttons
+                  name="Cancel"
+                  type="button"
+                  handleClick={closeModal}
+                  style={{ backgroundColor: "grey" }}
+                />
+              </div>
             </form>
           </div>
         </motion.div>
