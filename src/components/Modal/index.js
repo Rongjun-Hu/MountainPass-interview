@@ -6,6 +6,10 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Modal.css";
 
+const baseURL =
+  "https://interview-web-service.mountainpass.com.au/api/v1/projects";
+const authToken = "cGV0ZXI6QXFRSw==";
+
 const Modal = ({ closeModal, getAllProjects, openModal }) => {
   const [name, setName] = useState("");
   const [version, setVersion] = useState("");
@@ -18,15 +22,11 @@ const Modal = ({ closeModal, getAllProjects, openModal }) => {
       version: version,
     };
 
-    const { data } = await axios.post(
-      process.env.REACT_APP_BASE_URL,
-      newProject,
-      {
-        headers: {
-          Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
-        },
-      }
-    );
+    const { data } = await axios.post(baseURL, newProject, {
+      headers: {
+        Authorization: `Basic ${authToken}`,
+      },
+    });
     console.log(data.message);
     setName("");
     setVersion("");
