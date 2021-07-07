@@ -18,16 +18,17 @@ const Modal = ({ closeModal, getAllProjects, openModal }) => {
     e.preventDefault();
 
     const newProject = {
-      name: name,
-      version: version,
+      name,
+      version,
     };
 
     const { data } = await axios.post(baseURL, newProject, {
       headers: {
         Authorization: `Basic ${authToken}`,
+        "Content-Type": "application/json",
       },
     });
-    console.log(data.message);
+    console.log(data);
     setName("");
     setVersion("");
     alert("Success");
