@@ -7,6 +7,10 @@ import { Search } from "@material-ui/icons";
 import axios from "axios";
 import "./services.css";
 
+const baseURL =
+  "https://interview-web-service.mountainpass.com.au/api/v1/projects";
+const authToken = "cGV0ZXI6QXFRSw==";
+
 const Services = () => {
   const [openModal, setOpenModal] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -14,14 +18,11 @@ const Services = () => {
   const [totalPage, setTotalPage] = useState(0);
 
   const getAllProjects = async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}?page=1`,
-      {
-        headers: {
-          Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
-        },
-      }
-    );
+    const { data } = await axios.get(`${baseURL}?page=1`, {
+      headers: {
+        Authorization: `Basic ${authToken}`,
+      },
+    });
 
     setProjects(data.data);
     setTotalPage(data.totalPages);
