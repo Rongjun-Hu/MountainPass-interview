@@ -23,12 +23,16 @@ const Modal = ({ closeModal, getAllProjects, openModal }) => {
     };
 
     try {
-      const { data } = await axios.post(baseURL, newProject, {
-        headers: {
-          Authorization: `Basic ${authToken}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const { data } = await axios.post(
+        "https://interview-web-service.mountainpass.com.au/api/v1/projects",
+        newProject,
+        {
+          headers: {
+            Authorization: `Basic ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(data);
       setName("");
