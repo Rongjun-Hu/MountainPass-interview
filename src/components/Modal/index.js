@@ -2,47 +2,38 @@ import { useState } from "react";
 import Buttons from "../../components/Buttons";
 import { TextField } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
+import { getProjects, createProject } from "../../actions/projects";
+import { useDispatch } from "react-redux";
 import "./Modal.css";
 
-const baseURL =
-  "https://interview-web-service.mountainpass.com.au/api/v1/projects";
-const authToken = "cGV0ZXI6QXFRSw==";
+const Modal = ({ closeModal, page, openModal }) => {
+  const [projectData, setProjectData] = useState({
+    name: "",
+    version: "",
+  });
+  const dispatch = useDispatch();
 
-const Modal = ({ closeModal, getAllProjects, openModal }) => {
-  const [name, setName] = useState("");
-  const [version, setVersion] = useState("");
-
-  const createProject = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newProject = {
-      name,
-      version,
+      name: projectData.name,
+      version: projectData.version,
     };
 
-    try {
-      const { data } = await axios.post(
-        "https://interview-web-service.mountainpass.com.au/api/v1/projects",
-        newProject,
-        {
-          headers: {
-            Authorization: `Basic ${authToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    dispatch(createProject({ ...projectData, newProject }));
+    clear();
+    alert("Success");
+    dispatch(getProjects(page));
+    closeModal();
+  };
 
-      console.log(data);
-      setName("");
-      setVersion("");
-      alert("Success");
-      getAllProjects();
-      closeModal();
-    } catch (error) {
-      console.log(error.message);
-    }
+  const clear = () => {
+    setProjectData({
+      name: "",
+      version: "",
+    });
   };
 
   const variants = {
@@ -64,26 +55,32 @@ const Modal = ({ closeModal, getAllProjects, openModal }) => {
             <div className="modal__header">
               <h1>Add Service</h1>
               <Close onClick={closeModal} style={{ cursor: "pointer" }} />
-              {/* <button >X</button> */}
             </div>
 
-            <form onSubmit={createProject}>
+            <form onSubmit={handleSubmit}>
               <TextField
                 style={{ marginBottom: "1rem" }}
                 name="name"
                 label="Name"
                 variant="outlined"
                 size="small"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={projectData.name}
+                onChange={(e) =>
+                  setProjectData({ ...projectData, name: e.target.value })
+                }
               />
               <TextField
                 name="version"
                 label="Version"
                 variant="outlined"
                 size="small"
-                value={version}
-                onChange={(e) => setVersion(e.target.value)}
+                value={projectData.version}
+                onChange={(e) =>
+                  setProjectData({
+                    ...projectData,
+                    version: e.target.value,
+                  })
+                }
               />
               <Buttons name="Add Service" />
             </form>

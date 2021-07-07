@@ -2,41 +2,37 @@ import { useEffect, useState } from "react";
 import Buttons from "../../components/Buttons";
 import Modal from "../../components/Modal";
 import Projects from "../../components/Projects";
-import { Pagination } from "@material-ui/lab";
+import { Pagination, PaginationItem } from "@material-ui/lab";
 import { Search } from "@material-ui/icons";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { getProjects } from "../../actions/projects";
+import { Link } from "react-router-dom";
 import "./services.css";
 
-const baseURL =
-  "https://interview-web-service.mountainpass.com.au/api/v1/projects";
-
-const authToken = "cGV0ZXI6QXFRSw==";
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Services = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [projects, setProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [totalPage, setTotalPage] = useState(0);
+  const dispatch = useDispatch();
+  const qurey = useQuery();
+  const page = qurey.get("page") || 1;
+  const { projects, totalPages } = useSelector((state) => state.projects);
 
-  const getAllProjects = async () => {
-    const { data } = await axios.get(baseURL, {
-      headers: {
-        Authorization: `Basic ${authToken}`,
-      },
-    });
-
-    setProjects(data.data);
-    setTotalPage(data.totalPages);
-    console.log(data);
-  };
+  // console.log(projects);
 
   useEffect(() => {
-    getAllProjects();
-  }, []);
+    if (page) dispatch(getProjects(page));
+  }, [page]);
 
   const filterProjects = projects.filter((project) => {
     return project.name.toLowerCase().includes(searchTerm.toLocaleLowerCase());
   });
+
+  // console.log(filterProjects);
 
   return (
     <div className="services">
@@ -54,7 +50,7 @@ const Services = () => {
       <div className="services__projectList">
         <Projects
           projects={filterProjects}
-          getAllProjects={getAllProjects}
+          // getAllProjects={getAllProjects}
           term={searchTerm}
         />
       </div>
@@ -62,13 +58,21 @@ const Services = () => {
 
       <Pagination
         defaultPage={1}
-        count={totalPage}
+        count={totalPages}
+        page={Number(page) || 1}
         style={{ margin: "0 auto" }}
+        renderItem={(item) => (
+          <PaginationItem
+            {...item}
+            component={Link}
+            to={`/projects?page=${item.page}`}
+          />
+        )}
       />
 
       <Modal
         openModal={openModal}
-        getAllProjects={getAllProjects}
+        page={page}
         closeModal={() => setOpenModal(false)}
       />
     </div>
