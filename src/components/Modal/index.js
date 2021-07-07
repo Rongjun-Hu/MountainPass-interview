@@ -57,7 +57,7 @@ const Modal = ({ closeModal, page, openModal }) => {
               <Close onClick={closeModal} style={{ cursor: "pointer" }} />
             </div>
 
-            <form onSubmit={handleSubmit} autocomplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off">
               <TextField
                 style={{ marginBottom: "1rem" }}
                 name="name"
