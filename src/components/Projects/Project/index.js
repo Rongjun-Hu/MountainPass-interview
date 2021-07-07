@@ -2,11 +2,11 @@ import ButtonBox from "../../ButtonBox";
 import FlipMove from "react-flip-move";
 import "./Project.css";
 
-const Project = ({ projects }) => {
+const Project = ({ projects, filterProjects }) => {
   return (
     <>
       <FlipMove className="project">
-        {projects.map((project) => (
+        {filterProjects.map((project) => (
           <div className="project__item" key={project.id}>
             <ButtonBox
               solid="buttonBox--success"
