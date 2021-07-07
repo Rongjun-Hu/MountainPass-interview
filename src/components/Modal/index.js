@@ -57,7 +57,7 @@ const Modal = ({ closeModal, page, openModal }) => {
               <Close onClick={closeModal} style={{ cursor: "pointer" }} />
             </div>
 
-            <form autoComplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off">
               <TextField
                 style={{ marginBottom: "1rem" }}
                 error={projectData.name === ""}
@@ -92,9 +92,7 @@ const Modal = ({ closeModal, page, openModal }) => {
               <div className="form__buttons">
                 <Buttons
                   name="Add Service"
-                  type="submit"
                   // hover={true}
-                  handleClick={handleSubmit}
                 />
                 <Buttons
                   name="Cancel"
