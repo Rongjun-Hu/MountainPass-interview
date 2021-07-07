@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://interview-web-service.mountainpass.com.au/api/v1",
+  baseURL: "https://interview-web-service.mountainpass.com.au/api/v1/projects",
   headers: {
     Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
   },
@@ -9,5 +9,5 @@ const API = axios.create({
 
 // const authToken = "cGV0ZXI6QXFRSw==";
 
-export const getAllProjects = (page) => API.get(`/projects?page=${page}`);
-export const createProject = (newProject) => API.post("/projects", newProject);
+export const getAllProjects = (page) => API.get(`?page=${page}`);
+export const createProject = (newProject) => API.post("/", newProject);
