@@ -57,7 +57,7 @@ const Modal = ({ closeModal, page, openModal }) => {
               <Close onClick={closeModal} style={{ cursor: "pointer" }} />
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autocomplete="off">
               <TextField
                 style={{ marginBottom: "1rem" }}
                 name="name"
@@ -68,6 +68,7 @@ const Modal = ({ closeModal, page, openModal }) => {
                 onChange={(e) =>
                   setProjectData({ ...projectData, name: e.target.value })
                 }
+                required
               />
               <TextField
                 name="version"
@@ -81,8 +82,9 @@ const Modal = ({ closeModal, page, openModal }) => {
                     version: e.target.value,
                   })
                 }
+                required
               />
-              <Buttons name="Add Service" />
+              <Buttons name="Add Service" type="submit" />
             </form>
           </div>
         </motion.div>
