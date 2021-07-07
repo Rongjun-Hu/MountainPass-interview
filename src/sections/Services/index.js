@@ -48,11 +48,7 @@ const Services = () => {
         <Buttons name="ADD SERVICE" showModal={() => setOpenModal(true)} />
       </div>
       <div className="services__projectList">
-        <Projects
-          projects={filterProjects}
-          // getAllProjects={getAllProjects}
-          term={searchTerm}
-        />
+        <Projects projects={filterProjects} term={searchTerm} />
       </div>
       <br />
 
