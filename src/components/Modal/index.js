@@ -22,18 +22,23 @@ const Modal = ({ closeModal, getAllProjects, openModal }) => {
       version,
     };
 
-    const { data } = await axios.post(baseURL, newProject, {
-      headers: {
-        Authorization: `Basic ${authToken}`,
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(data);
-    setName("");
-    setVersion("");
-    alert("Success");
-    getAllProjects();
-    closeModal();
+    try {
+      const { data } = await axios.post(baseURL, newProject, {
+        headers: {
+          Authorization: `Basic ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log(data);
+      setName("");
+      setVersion("");
+      alert("Success");
+      getAllProjects();
+      closeModal();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const variants = {
