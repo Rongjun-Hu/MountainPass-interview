@@ -45,7 +45,7 @@ const Services = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search Project"
         />
-        <Buttons name="ADD SERVICE" showModal={() => setOpenModal(true)} />
+        <Buttons name="ADD SERVICE" handleClick={() => setOpenModal(true)} />
       </div>
       <div className="services__projectList">
         <Projects
