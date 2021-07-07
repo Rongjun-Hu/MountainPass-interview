@@ -9,9 +9,17 @@
 }
 
 .project__item {
+  position: relative;
   font-size: 0.875rem;
   max-width: 155px;
   width: 100%;
   margin: 0 auto;
   cursor: pointer;
+}
+
+.project__item .MuiSvgIcon-root {
+  position: absolute;
+  right: 0;
+  font-size: 1rem;
+  /* border: 1px solid red; */
 }
