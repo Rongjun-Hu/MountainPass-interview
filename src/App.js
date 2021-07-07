@@ -1,20 +1,23 @@
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
-import QuickActions from "./sections/QuickActions";
-import Services from "./sections/Services";
 import "./App.css";
+import Home from "./components/Home";
 
 const App = () => {
   return (
-    <div className="app">
-      {/* Header */}
-      <Header />
-      <div className="container">
-        {/* Quick Actions Section */}
-        <QuickActions />
-        {/* Services Section */}
-        <Services />
+    <BrowserRouter>
+      <div className="app">
+        {/* Header */}
+        <Header />
+        <div className="container">
+          <Switch>
+            <Route path="/projects" exact>
+              <Home />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 };
 
