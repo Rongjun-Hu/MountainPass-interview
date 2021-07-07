@@ -18,7 +18,7 @@ const Services = () => {
   const [totalPage, setTotalPage] = useState(0);
 
   const getAllProjects = async () => {
-    const { data } = await axios.get(`${baseURL}?page=1`, {
+    const { data } = await axios.get(baseURL, {
       headers: {
         Authorization: `Basic ${authToken}`,
       },
