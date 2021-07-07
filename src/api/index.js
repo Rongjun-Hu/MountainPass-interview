@@ -4,7 +4,6 @@ const API = axios.create({
   baseURL: "https://interview-web-service.mountainpass.com.au/api/v1",
   headers: {
     Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
-    "Access-Control-Allow-Origin": "http://localhost:3000",
   },
 });
 
