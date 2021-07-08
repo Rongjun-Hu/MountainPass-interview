@@ -3,8 +3,9 @@ import Buttons from "../../components/Buttons";
 import { TextField } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { motion, AnimatePresence } from "framer-motion";
-import { getProjects, createProject } from "../../actions/projects";
+import { getProjects } from "../../actions/projects";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 import "./Modal.css";
 
 const Modal = ({ closeModal, page, openModal }) => {
@@ -12,6 +13,7 @@ const Modal = ({ closeModal, page, openModal }) => {
     name: "",
     version: "",
   });
+  const [message, setMessage] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -22,7 +24,27 @@ const Modal = ({ closeModal, page, openModal }) => {
       version: projectData.version,
     };
 
-    dispatch(createProject({ ...projectData, newProject }));
+    const { data } = await axios.post(
+      "https://interview-web-service.mountainpass.com.au/api/v1/projects",
+      newProject,
+      {
+        headers: {
+          Authorization: `Basic cGV0ZXI6QXFRSw==`,
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+    console.log(data);
+    setMessage(data.message);
+
+    // dispatch(
+    //   createNewProject({
+    //     ...projectData,
+    //     newProject,
+    //   })
+    // );
+
     clear();
     alert("Success");
     dispatch(getProjects(page));
