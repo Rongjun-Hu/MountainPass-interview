@@ -36,7 +36,7 @@ const Modal = ({ closeModal, page, openModal }) => {
       newProject,
       {
         headers: {
-          Authorization: `Basic cGV0ZXI6QXFRSw==`,
+          Authorization: `Basic ${process.send.REACT_APP_AUTH}`,
           "Content-type": "application/json",
         },
       }

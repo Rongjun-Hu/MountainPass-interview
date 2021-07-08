@@ -3,7 +3,7 @@ import axios from "axios";
 const API = axios.create({
   baseURL: "https://interview-web-service.mountainpass.com.au/api/v1",
   headers: {
-    Authorization: `Basic `,
+    Authorization: `Basic ${process.send.REACT_APP_AUTH}`,
   },
 });
 
