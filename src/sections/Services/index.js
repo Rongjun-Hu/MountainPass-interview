@@ -22,13 +22,15 @@ const Services = () => {
   const page = qurey.get("page") || 1;
   const { projects, totalPages } = useSelector((state) => state.projects);
 
-  // console.log(projects);
+  console.log(projects);
 
   useEffect(() => {
     if (page) dispatch(getProjects(page));
-  }, [page]);
+  }, [dispatch, page]);
 
   const filterProjects = projects.filter((project) => {
+    if (searchTerm === "") return project;
+
     return project.name.toLowerCase().includes(searchTerm.toLocaleLowerCase());
   });
 
@@ -43,7 +45,7 @@ const Services = () => {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search Project"
+          placeholder="Filter Project"
         />
         <Buttons name="ADD SERVICE" handleClick={() => setOpenModal(true)} />
       </div>
