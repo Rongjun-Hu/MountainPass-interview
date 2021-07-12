@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://interview-web-service.mountainpass.com.au/api/v1/projects",
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
     Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
   },
