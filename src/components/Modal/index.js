@@ -3,15 +3,24 @@ import Buttons from "../../components/Buttons";
 import { TextField } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
 import { motion, AnimatePresence } from "framer-motion";
-import { getProjects, createProject } from "../../actions/projects";
+import { getProjects } from "../../actions/projects";
 import { useDispatch } from "react-redux";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import axios from "axios";
 import "./Modal.css";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Modal = ({ closeModal, page, openModal }) => {
   const [projectData, setProjectData] = useState({
     name: "",
     version: "",
   });
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -22,11 +31,39 @@ const Modal = ({ closeModal, page, openModal }) => {
       version: projectData.version,
     };
 
-    dispatch(createProject({ ...projectData, newProject }));
+    const { data } = await axios.post(
+      "https://interview-web-service.mountainpass.com.au/api/v1/projects",
+      newProject,
+      {
+        headers: {
+          Authorization: `Basic ${process.send.REACT_APP_AUTH}`,
+          "Content-type": "application/json",
+        },
+      }
+    );
+
+    console.log(data);
+    setOpen(true);
+    // dispatch(
+    //   createNewProject({
+    //     ...projectData,
+    //     newProject,
+    //   })
+    // );
+
+    setTimeout(() => {
+      closeModal();
+    }, 2000);
     clear();
-    alert("Success");
     dispatch(getProjects(page));
-    closeModal();
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   const clear = () => {
@@ -103,6 +140,11 @@ const Modal = ({ closeModal, page, openModal }) => {
               </div>
             </form>
           </div>
+          <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Add Service Successful!
+            </Alert>
+          </Snackbar>
         </motion.div>
       )}
     </AnimatePresence>
