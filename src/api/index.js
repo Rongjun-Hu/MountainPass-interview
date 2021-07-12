@@ -7,5 +7,5 @@ const API = axios.create({
   },
 });
 
-export const getAllProjects = (page) => API.get(`${API.baseURL}?page=${page}`);
-export const createProject = (newProject) => API.post(API.baseURL, newProject);
+export const getAllProjects = (page) => API.get(`?page=${page}`);
+export const createProject = (newProject) => API.post(newProject);
