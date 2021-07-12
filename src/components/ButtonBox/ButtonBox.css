@@ -65,6 +65,14 @@
   height: 40px;
   max-height: 100%;
   position: relative;
+  overflow: hidden;
+}
+
+.buttonBox__info p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
 }
 
 .buttonBox__version {
