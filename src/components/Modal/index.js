@@ -32,11 +32,11 @@ const Modal = ({ closeModal, page, openModal }) => {
     };
 
     const { data } = await axios.post(
-      "https://interview-web-service.mountainpass.com.au/api/v1/projects",
+      process.env.REACT_APP_BASE_URL,
       newProject,
       {
         headers: {
-          Authorization: `Basic ${process.send.REACT_APP_AUTH}`,
+          Authorization: `Basic ${process.env.REACT_APP_AUTH}`,
           "Content-type": "application/json",
         },
       }
